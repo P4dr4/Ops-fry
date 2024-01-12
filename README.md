@@ -37,14 +37,11 @@
 ### Action :
     
     - An action is a custom application for the GitHub Actions platform that performs 
-    a complex but frequently repeated task. Use an action to help reduce the amount of repetitive 
-    code that you write in your workflow files. An action can pull your git repository from GitHub,
-    set up the correct toolchain for your build environment, or set up the authentication to your
-    cloud provider.
+    a complex but frequently repeated task. Use an action to help reduce the amount of repetitive code that you write in your workflow files. An action can pull your git repository from GitHub, set up the correct toolchain for your build environment, 
+    or set up the authentication to your cloud provider.
 
 ### Runner :
     
     - A runner is a server that runs your workflows when they're triggered. Each runner 
     can run a single job at a time. GitHub provides Ubuntu Linux, Microsoft Windows, and macOS 
-    runners to run your workflows; each workflow run executes in a fresh, newly-provisioned virtual 
-    machine. GitHub also offers larger runners, which are available in larger configurations. 
+    runners to run your workflows; each workflow run executes in a fresh, newly-provisioned virtual machine. GitHub also offers larger runners, which are available in larger configurations. 
