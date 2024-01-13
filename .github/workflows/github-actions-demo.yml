@@ -1,6 +1,12 @@
 name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀 ## TODO: List all the github parameters here and explain them.
-on: [push]
+
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+
+on: 
+  push:
+    branches: 
+      - '*'
+
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
@@ -20,10 +26,15 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       
-      - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
+      - run: echo "🍏 This job's status is ${{ job.status }}." 
       
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Set up Git
+        run: |
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
 
       - name: Create and push _log branch
         run: |
