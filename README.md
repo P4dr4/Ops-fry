@@ -62,9 +62,6 @@
 
 ```mermaid
 graph TD;
-  Workflow-->Job1-->Steps1:
-  Workflow-->Job2-->Steps2:
-  Workflow-->Job3-->Steps3:
   Event-->Workflow-->Job-->Steps-->Action
   Event-->Runner;
   Workflow-->Runner;
