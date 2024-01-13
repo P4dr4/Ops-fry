@@ -43,6 +43,7 @@ jobs:
             mkdir -p _log
           else
             git checkout _log
+            git pull origin _log
           fi
 
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
