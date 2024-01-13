@@ -1,6 +1,6 @@
-# Ops-fry (Resume of GithubActions
+# Ops-fry (Resume of Github Actions)
 
-## What is GithubActions 
+## What is Github Actions 
 
     - GitHub Actions is a continuous integration and continuous delivery (CI/CD) 
     platform that allows you to automate your build, test, and deployment pipeline.
