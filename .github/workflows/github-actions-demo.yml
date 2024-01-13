@@ -48,9 +48,23 @@ jobs:
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
 
           git add _log/commit_message.txt
-          git commit -m "Add commit message file"
+          git commit -m "Add commit message SHA"
           git push origin _log
 
           git checkout ${{ github.head_ref || github.ref }}
         env:
           GITHUB_SHA: ${{ github.sha }}
+
+      - name: Adjusting Workflow file
+        run: |
+          git checkout _log
+      
+          rm .github/workflows/github-actions-demo.yml
+          
+          git add .
+          
+          git commit -m "Remove workflow file"
+          
+          git push origin _log
+      
+          echo ${{ job.status }}
