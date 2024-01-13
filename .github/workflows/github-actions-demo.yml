@@ -16,31 +16,36 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
       - name: Upload Log
         run: |
-          # Set up the working directory
           git init
+          
           git remote add origin https://github.com/P4dr4/Ops-fry.git
       
-          # Check if '_log' branch exists
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
-            # Create '_log' branch
+
             git checkout -b _log
-            # Configure Git user identity
+
             git config user.email "paccarini.bar@outlook.com"
+            
             git config user.name "P4dr4"
-            # Create '_log' folder
+
             mkdir _log
-            # Create a file in '_log' folder with commit message
+
             echo "Testing log branch creation" > _log/commit_message.txt
-            # Add and commit changes
+
             git add .
+
             git commit -m "Create '_log' folder and add commit message"
-            # Push the changes to '_log' branch using the GitHub token for authentication
-            git push origin _log --set-upstream --quiet ${{ secrets.GITHUB_TOKEN }}      
+
+            git push origin _log --set-upstream --quiet ${{ secrets.GITHUB_TOKEN }}
+
           else
+
             echo "📚 '_log' branch already exists."
-            # Update the existing file in '_log' folder with a new commit message
+
             echo "Testing log branch creation" > _log/commit_message.txt
+
           fi
+          
         shell: /usr/bin/bash -e {0}
       - name: Checkout code
         uses: actions/checkout@v4
