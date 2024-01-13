@@ -48,9 +48,12 @@ jobs:
         
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
 
-          rm .github/workflows/github-actions-demo.yml
-
-          echo "name:" > .github/workflows/log-workflow.yml          
+          if [ ! -f .github/workflows/log-workflow.yml ]; then
+            echo "name:" > .github/workflows/log-workflow.yml
+            git add .github/workflows/log-workflow.yml
+          fi
+      
+          rm .github/workflows/github-actions-demo.yml        
         
           git add .
           git commit -m "Add commit message SHA"
