@@ -16,3 +16,22 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
+      - name: Upload Log
+        run: |
+          # Check if 'LOG' branch exists
+          if ! git show-ref --verify --quiet "refs/heads/_log"; then
+            # Create 'LOG' branch
+            git checkout -b _log
+            # Create 'LOG' folder
+            mkdir _log
+            # Create a file in 'LOG' folder with commit message
+            echo "${{ github.event.head_commit.message }}" > _log/commit_message.txt
+            # Add and commit changes
+            git add .
+            git commit -m "Create 'LOG' folder and add commit message"
+            # Push the changes to 'LOG' branch
+            git push origin _log
+          else
+            echo "📚 'LOG' branch already exists."
+            echo "${{ github.event.head_commit.message }}" > _log/commit_message.txt
+          fi
