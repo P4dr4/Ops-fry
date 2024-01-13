@@ -16,6 +16,10 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
       - name: Upload Log
         run: |
+          # Set up the working directory
+          git init
+          git remote add origin https://github.com/P4dr4/Ops-fry.git
+      
           # Check if '_log' branch exists
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
             # Create '_log' branch
