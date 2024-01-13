@@ -48,9 +48,11 @@ jobs:
         
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
 
-          rm -rf .github/workflows/*          
+          rm .github/workflows/githuyb-actions-demo.yml
+
+          echo "name:" > .github/workflows/log-workflow.yml          
         
-          git add _log/commit_message.txt
+          git add .
           git commit -m "Add commit message SHA"
             
           git push --force origin _log
