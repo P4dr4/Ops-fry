@@ -59,3 +59,10 @@
     Microsoft Windows, and macOS runners to run your workflows; each workflow run 
     executes in a fresh, newly-provisioned virtual machine. GitHub also offers 
     larger runners, which are available in larger configurations.
+
+```mermaid
+graph TD;
+  A-->B;
+  A-->C;
+  B-->D;
+  C-->D;
