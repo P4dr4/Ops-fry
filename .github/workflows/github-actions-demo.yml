@@ -60,20 +60,14 @@ jobs:
       - name: Adjusting Workflow file
         run: |
           git checkout _log
-      
-          rm .github/workflows/github-actions-demo.yml
-
-          if .github/workflows/action-log.yml; then
-
-            echo ${{ job.status }}
-
-          else
-
-            mkdir -p .github/workflows/action-log.yml
-            git add .
-            git commit -m "Remove workflow file"
-          
-            git push origin _log
-            echo ${{ job.status }}
-
-          fi
+    
+          rm -rf .github/workflows/*
+    
+          touch .github/workflows/action-log.yml
+    
+          git add .
+          git commit -m "Remove all files from .github/workflows"
+        
+          git push --force origin _log
+    
+          echo ${{ job.status }}
