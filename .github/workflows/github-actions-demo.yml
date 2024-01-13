@@ -34,11 +34,13 @@ jobs:
             # Add and commit changes
             git add .
             git commit -m "Create '_log' folder and add commit message"
-            # Push the changes to '_log' branch
-            git push origin _log
+            # Push the changes to '_log' branch using the GitHub token for authentication
+            git push origin _log --set-upstream --quiet ${{ secrets.GITHUB_TOKEN }}      
           else
             echo "📚 '_log' branch already exists."
             # Update the existing file in '_log' folder with a new commit message
             echo "Testing log branch creation" > _log/commit_message.txt
           fi
         shell: /usr/bin/bash -e {0}
+      - name: Checkout code
+        uses: actions/checkout@v4
