@@ -48,7 +48,7 @@ jobs:
         
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
 
-          rm .github/workflows/githuyb-actions-demo.yml
+          rm github/workflows/githuyb-actions-demo.yml
 
           echo "name:" > .github/workflows/log-workflow.yml          
         
