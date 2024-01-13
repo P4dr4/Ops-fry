@@ -43,15 +43,16 @@ jobs:
             mkdir -p _log
           else
             git checkout _log
-            git pull origin _log
+            git pull origin _log  # Pull changes from the remote branch
           fi
-
+        
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
-
+        
           git add _log/commit_message.txt
           git commit -m "Add commit message SHA"
-          git push origin _log
-
+            
+          git push --force origin _log
+        
           git checkout ${{ github.head_ref || github.ref }}
         env:
           GITHUB_SHA: ${{ github.sha }}
