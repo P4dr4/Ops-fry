@@ -62,6 +62,8 @@ jobs:
           git checkout _log
       
           rm .github/workflows/github-actions-demo.yml
+
+          mkdir .github/workflows/action-log.yml
           
           git add .
           
