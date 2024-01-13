@@ -43,7 +43,7 @@ jobs:
             mkdir -p _log
           else
             git checkout _log
-            git pull origin _log  # Pull changes from the remote branch
+            git pull origin _log
           fi
         
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
@@ -63,12 +63,17 @@ jobs:
       
           rm .github/workflows/github-actions-demo.yml
 
-          mkdir .github/workflows/action-log.yml
+          if .github/workflows/action-log.yml; then
+
+            echo ${{ job.status }}
+
+          else
+
+            mkdir -p .github/workflows/action-log.yml
+            git add .
+            git commit -m "Remove workflow file"
           
-          git add .
-          
-          git commit -m "Remove workflow file"
-          
-          git push origin _log
-      
-          echo ${{ job.status }}
+            git push origin _log
+            echo ${{ job.status }}
+
+          fi
