@@ -5,47 +5,41 @@ jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
     steps:
+      
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      
       - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
-      - name: Upload Log
-        run: |
-          git init
-          
-          git remote add origin https://github.com/P4dr4/Ops-fry.git
       
-          if ! git show-ref --verify --quiet "refs/heads/_log"; then
-
-            git checkout -b _log
-
-            git config user.email "paccarini.bar@outlook.com"
-            
-            git config user.name "P4dr4"
-
-            mkdir _log
-
-            echo "Testing log branch creation" > _log/commit_message.txt
-
-            git add .
-
-            git commit -m "Create '_log' folder and add commit message"
-
-            git push origin _log --set-upstream --quiet ${{ secrets.GITHUB_TOKEN }}
-
-          else
-
-            echo "📚 '_log' branch already exists."
-
-            echo "Testing log branch creation" > _log/commit_message.txt
-
-          fi
-          
-        shell: /usr/bin/bash -e {0}
+      - run: echo "🍏 This job's status is ${{ job.status }}." ## TODO: List all the github parameters here and explain them.
+      
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Create and push _log branch
+        run: |
+          if ! git show-ref --verify --quiet "refs/heads/_log"; then
+            git checkout -b _log
+          else
+            git checkout _log
+          fi
+
+          mkdir -p _log
+          echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
+
+          git add _log/commit_message.txt
+          git commit -m "Add commit message file"
+          git push origin _log
+
+          git checkout ${{ github.head_ref || github.ref }}
+        env:
+          GITHUB_SHA: ${{ github.sha }}
