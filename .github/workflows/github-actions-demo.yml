@@ -29,11 +29,11 @@ jobs:
         run: |
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
             git checkout -b _log
+            mkdir -p _log
           else
             git checkout _log
           fi
 
-          mkdir -p _log
           echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
 
           git add _log/commit_message.txt
