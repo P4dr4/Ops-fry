@@ -46,7 +46,7 @@ jobs:
             git pull origin _log
           fi
         
-          echo "Commit message: $GITHUB_SHA" > _log/commit_message.txt
+          echo "Commit message: $GITHUB_SHA" >> _log/commit_message.txt
           
           rm .github/workflows/github-actions-demo.yml   
 
