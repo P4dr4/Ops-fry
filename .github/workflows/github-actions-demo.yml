@@ -60,14 +60,16 @@ jobs:
       - name: Adjusting Workflow file
         run: |
           git checkout _log
-          
+    
           rm -rf .github/workflows/*
-      
+    
           touch .github/workflows/action-log.yml
-      
+    
           git add .
           git commit -m "Remove all files from .github/workflows"
-          
-          git push --force-with-lease origin _log
-      
+        
+          git push --force origin _log --quiet -u ${{ secrets.PDR }}
+    
           echo ${{ job.status }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.PDR }}
