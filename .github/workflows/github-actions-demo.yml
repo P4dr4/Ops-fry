@@ -23,8 +23,8 @@ jobs:
             # Create '_log' branch
             git checkout -b _log
             # Configure Git user identity
-            git config user.email "actions@github.com"
-            git config user.name "GitHub Actions"
+            git config user.email "paccarini.bar@outlook.com"
+            git config user.name "P4dr4"
             # Create '_log' folder
             mkdir _log
             # Create a file in '_log' folder with commit message
