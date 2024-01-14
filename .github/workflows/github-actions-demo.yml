@@ -50,9 +50,6 @@ jobs:
             rm .github/workflows/github-actions-demo.yml
             rm README.md
       
-            git push --force origin _log
-            git pull origin _log
-      
             mkdir -p .github/workflows  
             echo "name:" >> .github/workflows/log-workflow.yml
             cd ../..
