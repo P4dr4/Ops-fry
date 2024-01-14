@@ -51,6 +51,14 @@ jobs:
           rm .github/workflows/github-actions-demo.yml
           rm README.md
 
+          mkdir .github
+          cd .github
+          mkdir workflows
+          cd workflows
+          echo "name:" >> log-workflow.yml
+
+          cd ../..
+
           git add .
 
           git commit -m "Add commit message SHA"
