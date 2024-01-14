@@ -51,19 +51,13 @@ jobs:
             rm README.md
       
             git push --force origin _log
+            git pull origin _log
       
-            ls
-            mkdir -p .github
-            cd .github
-            mkdir -p workflows
-            cd workflows
-            echo "name:" >> log-workflow.yml
+            mkdir -p .github/workflows  
+            echo "name:" >> .github/workflows/log-workflow.yml
             cd ../..
       
-            git add .
-      
-            git commit -m "Add commit message SHA"
-            
+            git commit -m "Add commit message SHA and checking workflows folder"          
             git push --force origin _log
           fi
           git checkout "${{ github.head_ref || github.ref }}"
