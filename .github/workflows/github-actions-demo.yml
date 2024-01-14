@@ -46,12 +46,12 @@ jobs:
             git pull origin _log
       
             echo "Commit message: $GITHUB_SHA" >> _log/commit_message.txt
-      
-            rm .github/workflows/github-actions-demo.yml
+
             rm README.md
-      
-            mkdir -p .github/workflows  
-            echo "name:" >> .github/workflows/log-workflow.yml
+            cd .github
+            cd workflows
+            rm github-actions-demo.yml             
+            echo "name:" >> log-workflow.yml
             cd ../..
       
             git commit -m "Add commit message SHA and checking workflows folder"          
