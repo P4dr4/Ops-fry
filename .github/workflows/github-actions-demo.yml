@@ -40,23 +40,32 @@ jobs:
         run: |
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
             git checkout -b _log
-            mkdir -p _log
+            mkdir -p .github/workflows
+            echo "name:" >> .github/workflows/log-workflow.yml
+            git add .github/workflows/log-workflow.yml
           else
             git checkout _log
             git pull origin _log
       
             echo "Commit message: $GITHUB_SHA" >> _log/commit_message.txt
-
+      
+            # If you need to delete certain files
             rm README.md
+            # ...
+      
             cd .github
-            cd workflows
+            mkdir -p workflows
             # rm github-actions-demo.yml             
-            echo "name:" >> log-workflow.yml
+            echo "name:" >> workflows/log-workflow.yml
             cd ../..
       
-            git commit -m "Add commit message SHA and checking workflows folder"          
-            git push --force origin _log
+            git add -A  # Stage all changes
           fi
+      
+          git commit -m "Add commit message SHA and checking workflows folder"
+          git push --force origin _log
+      
           git checkout "${{ github.head_ref || github.ref }}"
         env:
           GITHUB_SHA: ${{ github.sha }}
+        
