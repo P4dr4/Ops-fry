@@ -51,12 +51,15 @@ jobs:
           rm .github/workflows/github-actions-demo.yml
           rm README.md
 
+          git add .
+          git commit -m "Deleting old workflow"
+          git push --force origin _log
+
           mkdir .github
           cd .github
           mkdir workflows
           cd workflows
           echo "name:" >> log-workflow.yml
-
           cd ../..
 
           git add .
