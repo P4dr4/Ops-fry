@@ -40,32 +40,40 @@ jobs:
         run: |
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
             git checkout -b _log
-            mkdir -p .github/workflows
-            echo "name:" >> .github/workflows/log-workflow.yml
+            echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
             git add .github/workflows/log-workflow.yml
+            git commit -m "Update workflow file with new name"
+            git push
           else
             git checkout _log
             git pull origin _log
       
             echo "Commit message: $GITHUB_SHA" >> _log/commit_message.txt
-      
-            # If you need to delete certain files
             rm README.md
-            # ...
-      
-            cd .github
-            mkdir -p workflows
-            # rm github-actions-demo.yml             
-            echo "name:" >> workflows/log-workflow.yml
-            cd ../..
-      
-            git add -A  # Stage all changes
+            
+            git commit -m "Add commit message SHA and checking workflows folder"
+            git push --force origin _log
           fi
-      
-          git commit -m "Add commit message SHA and checking workflows folder"
-          git push --force origin _log
-      
+
           git checkout "${{ github.head_ref || github.ref }}"
         env:
           GITHUB_SHA: ${{ github.sha }}
+      
+  update-log-workflow:
+    runs-on: ubuntu-latest    
+    steps:
+      - name: Checkout to _log branch
+        uses: actions/checkout@v2
+        with:
+          ref: _log
         
+      - name: Rewrite and Rename Workflow File
+        run: |
+          echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
+          git add .github/workflows/log-workflow.yml
+          git commit -m "Update workflow file with new name"
+          git push
+        
+      - name: Finalize
+        run: |
+          echo "Workflow file updated and pushed to _log branch."       
