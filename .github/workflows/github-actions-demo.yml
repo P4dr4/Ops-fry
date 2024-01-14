@@ -40,19 +40,19 @@ jobs:
         run: |
           if ! git show-ref --verify --quiet "refs/heads/_log"; then
             git checkout -b _log
-            echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
             git add .github/workflows/log-workflow.yml
+            echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
             git commit -m "Update workflow file with new name"
-            git push
+            git push --set-upstream origin _log
           else
             git checkout _log
             git pull origin _log
       
             echo "Commit message: $GITHUB_SHA" >> _log/commit_message.txt
             rm README.md
-            
+
             git commit -m "Add commit message SHA and checking workflows folder"
-            git push --force origin _log
+            git push --set-upstream origin _log
           fi
 
           git checkout "${{ github.head_ref || github.ref }}"
@@ -69,8 +69,8 @@ jobs:
         
       - name: Rewrite and Rename Workflow File
         run: |
-          echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
           git add .github/workflows/log-workflow.yml
+          echo 'name: Log Workflow' > .github/workflows/log-workflow.yml
           git commit -m "Update workflow file with new name"
           git push
         
