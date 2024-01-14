@@ -50,7 +50,7 @@ jobs:
             rm README.md
             cd .github
             cd workflows
-            rm github-actions-demo.yml             
+            # rm github-actions-demo.yml             
             echo "name:" >> log-workflow.yml
             cd ../..
       
